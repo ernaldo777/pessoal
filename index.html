@@ -155,6 +155,14 @@
             font-size: 1rem;
         }
 
+        .form-section input[type="tel"] {
+            max-width: 300px;
+        }
+
+        .form-section input[type="date"] {
+            max-width: 200px;
+        }
+
         .form-section textarea {
             resize: vertical;
             min-height: 150px;
@@ -272,6 +280,12 @@
 
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
+
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" pattern="\(\d{2,3}\) \d{4,5}-\d{4}" placeholder="(123) 456-7890" required>
+
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob" required>
 
                 <label for="message">Message</label>
                 <textarea id="message" name="message" required></textarea>
