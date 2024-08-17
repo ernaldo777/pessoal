@@ -1,3 +1,10 @@
+/* Reset básico para garantir que o box-sizing seja border-box em todos os elementos */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 /* Definição de cores e fontes */
 :root {
     --primary-color: #1f78d1;
@@ -5,61 +12,57 @@
     --accent-color: #ff4081;
     --bg-color: #f0f4f8;
     --text-color: #333333;
-    --font-family-body: 'Roboto', sans-serif;
-    --font-family-heading: 'Playfair Display', serif;
-    --section-bg-color-odd: #ffffff;
-    --section-bg-color-even: #f0f4f8;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Roboto', sans-serif;
 }
 
 /* Corpo da página */
 body {
-    font-family: var(--font-family-body);
+    font-family: var(--font-body);
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
     padding: 0;
 }
 
-/* Header e Footer */
-header, footer {
+/* Header */
+header {
     background-color: var(--primary-color);
     color: var(--secondary-color);
+    padding: 20px;
+    text-align: center;
+    border-bottom: 5px solid var(--accent-color); /* Usando box model para dar destaque */
 }
 
 header h1 {
-    font-family: var(--font-family-heading);
+    font-family: var(--font-heading);
     font-size: 3rem;
     font-weight: bold;
-    margin-bottom: 0;
+    margin: 0;
 }
 
+/* Nav Links */
 header nav .nav-link {
     color: var(--secondary-color);
     font-weight: 500;
     padding: 0.5rem 1rem;
+    border-radius: 5px; /* Adiciona espaçamento ao redor do link */
 }
 
 header nav .nav-link:hover {
-    color: var(--accent-color);
-}
-
-footer {
-    padding: 1.5rem 0;
-}
-
-footer p {
-    margin: 0;
-    font-size: 1rem;
+    background-color: var(--accent-color); /* Destaca o link quando o mouse passa */
+    color: var(--secondary-color);
 }
 
 /* Títulos e Texto */
 h2 {
-    font-family: var(--font-family-heading);
+    font-family: var(--font-heading);
     color: var(--primary-color);
     font-weight: bold;
     margin-bottom: 1.5rem;
     text-align: center;
     position: relative;
+    padding-bottom: 10px; /* Espaçamento extra para o pseudo-elemento */
 }
 
 h2::after {
@@ -72,51 +75,64 @@ h2::after {
     border-radius: 2px;
 }
 
-p.lead {
-    font-family: var(--font-family-body);
-    font-size: 1.25rem;
-    font-weight: 300;
-    color: var(--text-color);
-    text-align: center;
-}
-
-/* Cartões (Cards) */
+/* Cards */
 .card {
-    border: none;
+    border: 1px solid #ddd;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
     background-color: var(--secondary-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Eleva o cartão ao passar o mouse */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aumenta a sombra para dar destaque */
 }
 
 .card img {
     border-radius: 10px 10px 0 0;
+    width: 100%;
 }
 
 .card-title {
-    font-family: var(--font-family-heading);
+    font-family: var(--font-heading);
     color: var(--primary-color);
     font-weight: bold;
     margin-bottom: 0.75rem;
     text-align: center;
 }
 
-.card-body p {
-    font-family: var(--font-family-body);
-    color: var(--text-color);
-    font-size: 1rem;
-}
-
 /* Links */
 a {
     color: var(--primary-color);
     text-decoration: none;
+    position: relative;
+    padding: 2px 0;
+    transition: color 0.3s ease;
+}
+
+a::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent-color);
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out;
+}
+
+a:hover::before {
+    visibility: visible;
+    transform: scaleX(1);
 }
 
 a:hover {
     color: var(--accent-color);
-    text-decoration: underline;
 }
 
 /* Formulário */
@@ -124,14 +140,13 @@ a:hover {
     border-radius: 5px;
     border: 1px solid #ccc;
     padding: 0.75rem;
-    font-family: var(--font-family-body);
     font-size: 1rem;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .form-control:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.2rem rgba(31, 120, 209, 0.25);
+    box-shadow: 0 0 5px rgba(31, 120, 209, 0.25);
 }
 
 .btn-primary {
@@ -139,7 +154,6 @@ a:hover {
     border-color: var(--primary-color);
     border-radius: 5px;
     padding: 0.75rem 1.5rem;
-    font-family: var(--font-family-body);
     font-size: 1rem;
     transition: background-color 0.3s, border-color 0.3s;
 }
@@ -153,11 +167,13 @@ a:hover {
 .table {
     border-collapse: separate;
     border-spacing: 0;
+    width: 100%;
 }
 
 .table thead th {
     background-color: var(--primary-color);
     color: var(--secondary-color);
+    padding: 10px;
     border-bottom: 2px solid var(--primary-color);
 }
 
@@ -170,19 +186,43 @@ a:hover {
     color: var(--secondary-color);
 }
 
-/* Separação das Seções */
+.table tbody td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* Seções */
 section {
-    padding: 4rem 0;
-    margin-top: 4rem;
+    padding: 60px 0;
+    margin: 20px 0;
     background-color: var(--section-bg-color-odd);
     box-shadow: 0px 10px 15px -10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 section:nth-of-type(even) {
     background-color: var(--section-bg-color-even);
 }
 
-/* Ajustes de Responsividade */
+section:hover {
+    box-shadow: 0px 15px 25px -10px rgba(0, 0, 0, 0.5); /* Aumenta a sombra ao passar o mouse */
+}
+
+/* Footer */
+footer {
+    padding: 1.5rem 0;
+    text-align: center;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-top: 5px solid var(--accent-color); /* Usando box model para dar destaque */
+}
+
+footer p {
+    margin: 0;
+    font-size: 1rem;
+}
+
 @media (max-width: 768px) {
     header h1 {
         font-size: 2rem;
