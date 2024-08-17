@@ -7,7 +7,7 @@
     --text-color: #333333;
     --font-family: 'Roboto', sans-serif;
     --section-bg-color-odd: #ffffff;
-    --section-bg-color-even: #f9fafb;
+    --section-bg-color-even: #f0f4f8;
 }
 
 /* Corpo da página */
@@ -148,4 +148,48 @@ a:hover {
 }
 
 .table thead th {
-    background-color: var(--prima
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: var(--bg-color);
+}
+
+.table tbody tr:hover {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+}
+
+/* Separação das Seções */
+section {
+    padding: 4rem 0;
+    margin-top: 4rem;
+    background-color: var(--section-bg-color-odd);
+    box-shadow: 0px 10px 15px -10px rgba(0, 0, 0, 0.3);
+}
+
+section:nth-of-type(even) {
+    background-color: var(--section-bg-color-even);
+}
+
+/* Ajustes de Responsividade */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .card-body p {
+        font-size: 0.875rem;
+    }
+
+    .btn-primary {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+
+    footer p {
+        font-size: 0.875rem;
+    }
+}
